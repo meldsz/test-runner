@@ -1,68 +1,31 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This application is built using React library for the UI and Redux library for state management. 
 
-## Available Scripts
+### Setup
+* Clone this repository
+* Install all the dependencies: npm install
+* Run the application for development: npm start
 
-In the project directory, you can run:
+### Features:
+* The application generates a test report in a tabular format for clear indication of individual test execution status. 
+* This status is updated dynamically without any user interaction, other than the initial click of the START button.
+* Icons are utilised to eliminate text clutter.
+* Standard colors are utilised to indicate success, failures and waiting state for better visual clarity.
 
-### `npm start`
+### Implementation:
+Modern Javascript features are utilised to build the test runner. Individual tests are executed asynchronously using async/await and all the tests are executed together in parallel using javascript promises. Promise.all() ensures each of these tests are executed at the same time.
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+The status of each test is stored in a redux store so that the data can be accessed across the application. Redux state updates are synchronous which will ensure that the application reflects the status immediately after the update.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+Input processing:
+When the user clicks the START button, the input is first processed and then the tests are executed. To the input containing tests description and test function call, a new property is added dynamically to each of these test objects. It is set as a getter property to get access to its containing object properties.
+This new property is a function which does the following:
+* Updates the status to running
+* Test execution 
+* Updates the status to pass/fail based on the execution result
 
-### `npm test`
+Test Execution:
+After the input has been processed, the tests are executed in parallel using javascript Promise.all().
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+Possible extensions to the design in the future:
+* Calculating the execution time of each test
+* Calculating the execution time of all the tests
